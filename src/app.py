@@ -1,9 +1,8 @@
-from flask import (
-    render_template,
-    Flask,
-)
+import connexion
+from flask import render_template
 
-app = Flask(__name__, template_folder="templates")
+app = connexion.App(__name__, specification_dir="./")
+app.add_api("swagger.yml")
 
 
 @app.route("/")
@@ -12,4 +11,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
